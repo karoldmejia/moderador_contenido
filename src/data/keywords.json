@@ -1,0 +1,44 @@
+{
+  "badwords": [
+    "stupid", "idiot", "moron", "dumb", "loser", "fool", "jerk", "asshole", "bastard", "scumbag",
+    "cretin", "imbecile", "pig", "shithead", "clown", "twat", "dork", "slut", "prick", "fuck"
+  ],
+  "sexwords": [
+    "porn", "dick", "cock", "pussy", "boobs", "tits", "nude", "sex", "horny", "fetish",
+    "naked", "erotic", "xxx", "cum", "blowjob", "handjob", "orgasm", "masturbate", "penis", "vagina"
+  ],
+  "violence": [
+    "kill", "murder", "shoot", "stab", "bomb", "attack", "slaughter", "assault", "torture", "explode",
+    "choke", "fight", "terrorist", "execute", "behead", "maim", "massacre", "riot", "gunfire", "weapon"
+  ],
+  "drugs": [
+    "weed", "marijuana", "cocaine", "heroin", "ecstasy", "mdma", "meth", "lsd", "acid", "shrooms",
+    "opium", "hash", "ketamine", "pcp", "cannabis", "mushrooms", "speed", "tramadol", "cannabinoid", "opioid"
+  ],
+  "selfharm": [
+    "suicide", "cut", "kill myself", "end my life", "hang myself", "self harm", "die", "jump", "bleed", "slice",
+    "stab myself", "poison", "overdose", "self injury", "hurt myself", "pills", "burn", "choke myself", "strangle", "bleeding"
+  ],
+  "spamwords": [
+    "click here", "buy now", "free money", "subscribe", "win", "offer", "deal", "promotion", "limited time", "sale",
+    "discount", "cheap", "register", "join now", "get rich", "earn money", "bonus", "free trial", "visit", "sponsor"
+  ],
+  "fakeclaims": [
+    "miracle cure", "100% proven", "guaranteed", "lose weight fast", "instant results", "secret formula", "hidden truth",
+    "cure cancer", "magic pill", "no side effects", "hack", "life changing", "revolutionary", "proven method", "scientifically proven",
+    "guaranteed results", "secret technique", "breakthrough", "unbelievable", "miracle solution"
+  ],
+  "politics": [
+    "democrats", "republicans", "communists", "fascists", "liberals", "conservatives", "socialists", "capitalists",
+    "corruption", "dictator", "politician", "election", "government", "senator", "president", "vote", "policy", "law", "protest", "rights"
+  ],
+  "pronouns": [
+    "i", "me", "my", "mine", "you", "your", "yours", "he", "him", "his",
+    "she", "her", "hers", "we", "us", "our", "ours", "they", "them", "theirs"
+  ],
+  "bademojis": [
+    "\ud83d\udca5", "\ud83d\udc80", "\ud83d\udd2a", "\ud83d\udc94", "\ud83d\udc7f", "\ud83d\udc94",
+    "\ud83d\udd28", "\ud83d\udc94", "\ud83d\udc7e", "\ud83d\udc94", "\ud83d\udc99", "\ud83d\udca8",
+    "\ud83d\udc89", "\ud83d\udc7f", "\ud83d\udc94", "\ud83d\udca3", "\ud83d\udc7c", "\ud83d\udca9", "\ud83d\udc7e", "\ud83d\udca5"
+  ]
+}
