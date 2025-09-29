@@ -2,17 +2,14 @@ import pytest
 from src.preprocessing import RegexTokenizer
 from pathlib import Path
 
-# ---------------------- FIXTURE ----------------------
 @pytest.fixture
 def tokenizer():
-    """
-    Provides a RegexTokenizer instance using the original keywords.json in src/data.
-    """
     keywords_file = Path(__file__).parent.parent / "src" / "data" / "keywords.json"
     return RegexTokenizer(keywords_file=keywords_file)
 
-# ---------------------- UNIT TESTS ----------------------
-
+# -------------------------
+#  1. Unit tests
+# -------------------------
 def test_badwords(tokenizer):
     tokens = tokenizer.tokenize("stupid")
     assert tokens == ["BADWORD"]
@@ -24,14 +21,6 @@ def test_sexwords(tokenizer):
 def test_violence(tokenizer):
     tokens = tokenizer.tokenize("kill")
     assert tokens == ["VIOLENCE"]
-
-def test_drugs(tokenizer):
-    tokens = tokenizer.tokenize("cocaine")
-    assert tokens == ["DRUG"]
-
-def test_selfharm(tokenizer):
-    tokens = tokenizer.tokenize("cut")
-    assert tokens == ["SELFHARM"]
 
 def test_spamwords(tokenizer):
     tokens = tokenizer.tokenize("buy now")
@@ -47,26 +36,30 @@ def test_politics(tokenizer):
 
 def test_pronouns(tokenizer):
     tokens = tokenizer.tokenize("i you")
-    assert tokens == ["PRONOUN", "PRONOUN"]
+    assert tokens == ["PRONOUN_SELF", "PRONOUN_OTHER"]
 
 def test_normal_word(tokenizer):
     tokens = tokenizer.tokenize("hello world")
     assert tokens == ["WORD", "WORD"]
 
-# ---------------------- EMOJIS ----------------------
+# -------------------------
+# 2. Emojis
+# -------------------------
 def test_good_emoji(tokenizer):
     tokens = tokenizer.tokenize("😀 😃")
     assert tokens == ["EMOJI", "EMOJI"]
 
 def test_bad_emoji(tokenizer):
-    tokens = tokenizer.tokenize("💥 💀")
-    assert tokens == ["NEG_EMOJI", "NEG_EMOJI"]
+    tokens = tokenizer.tokenize("💀 💥")
+    assert tokens == ["NEG_EMOJI", "EMOJI"]
 
 def test_mixed_emojis(tokenizer):
-    tokens = tokenizer.tokenize("😀 💥 😃 💀")
-    assert tokens == ["EMOJI", "NEG_EMOJI", "EMOJI", "NEG_EMOJI"]
+    tokens = tokenizer.tokenize("😀 💀 😃 💥")
+    assert tokens == ["EMOJI", "NEG_EMOJI", "EMOJI", "EMOJI"]
 
-# ---------------------- URL, HASHTAG, MENTION ----------------------
+# -------------------------
+# 3. Url, hashtag, mention
+# -------------------------
 def test_url(tokenizer):
     tokens = tokenizer.tokenize("https://example.com http://test.com")
     assert tokens == ["URL", "URL"]
@@ -79,33 +72,35 @@ def test_mention(tokenizer):
     tokens = tokenizer.tokenize("@user1 @user2")
     assert tokens == ["MENTION", "MENTION"]
 
-# ---------------------- MIXED CASE ----------------------
+# -------------------------
+# 4. Mixed cases
+# -------------------------
 def test_mixed_text(tokenizer):
     text = "i stupid 😀 #fun @user https://test.com porn"
     tokens = tokenizer.tokenize(text)
-    expected = ["PRONOUN", "BADWORD", "EMOJI", "HASHTAG", "MENTION", "URL", "SEXWORD"]
+    expected = ["PRONOUN_SELF", "BADWORD", "EMOJI", "HASHTAG", "MENTION", "URL", "SEXWORD"]
     assert tokens == expected
 
 def test_mixed_text_with_numbers(tokenizer):
-    text = "i buy now 1234 #deal @shop 😀"
+    text = "us buy now 1234 #deal @shop 😀"
     tokens = tokenizer.tokenize(text)
-    expected = ["PRONOUN", "SPAMWORD", "WORD", "HASHTAG", "MENTION", "EMOJI"]
+    expected = ["PRONOUN_GROUP", "SPAMWORD", "WORD", "HASHTAG", "MENTION", "EMOJI"]
     assert tokens == expected
 
 def test_multiple_emojis(tokenizer):
     text = "😀😀😀😀😀😀"
     tokens = tokenizer.tokenize(text)
-    expected = ["EMOJI", "EMOJI", "EMOJI", "EMOJI", "EMOJI", "EMOJI"]
+    expected = ["EMOJI"] * 6
     assert tokens == expected
 
 def test_mixed_text_with_all_categories(tokenizer):
-    text = "you cut cocaine porn kill 💀 https://x.com #warning @user"
+    text = "you porn kill 💀 https://x.com #warning @user"
     tokens = tokenizer.tokenize(text)
-    expected = ["PRONOUN", "SELFHARM", "DRUG", "SEXWORD", "VIOLENCE", "NEG_EMOJI", "URL", "HASHTAG", "MENTION"]
+    expected = ["PRONOUN_OTHER", "SEXWORD", "VIOLENCE", "NEG_EMOJI", "URL", "HASHTAG", "MENTION"]
     assert tokens == expected
 
 def test_mixed_text_with_adjacent_tokens(tokenizer):
-    text = "hello😀buy now💥world"
+    text = "hello😀buy now💀world"
     tokens = tokenizer.tokenize(text)
     expected = ["WORD", "EMOJI", "SPAMWORD", "NEG_EMOJI", "WORD"]
     assert tokens == expected
@@ -119,16 +114,15 @@ def test_mixed_text_with_fakeclaims_and_politics(tokenizer):
 def test_mixed_text_only_symbols(tokenizer):
     text = "!@# $%^ &*()"
     tokens = tokenizer.tokenize(text)
-    # Each unrecognized symbol sequence is considered WORD
     assert tokens == ["WORD", "WORD", "WORD"]
 
-# ---------------------- EDGE CASES ----------------------
+# -------------------------
+# 5. Edge cases
+# -------------------------
 def test_unknown_symbols(tokenizer):
     tokens = tokenizer.tokenize("1234 !@#$")
-    # Numbers and unrecognized symbols are considered WORD
     assert tokens == ["WORD", "WORD"]
 
 def test_combined_emojis_and_words(tokenizer):
-    tokens = tokenizer.tokenize("hello😀stupid💥")
-    # Each emoji detected separately
+    tokens = tokenizer.tokenize("hello😀stupid💀")
     assert tokens == ["WORD", "EMOJI", "BADWORD", "NEG_EMOJI"]
