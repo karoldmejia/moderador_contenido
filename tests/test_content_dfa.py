@@ -127,3 +127,61 @@ def test_multiple_irrelevant_then_politics(dfa, tokenizer):
 def test_multiple_irrelevant_then_violence(dfa, tokenizer):
     result = run_dfa_on_text(dfa, tokenizer, "Sometimes I think about hurting others", "qF_Others")
     assert result == dfa.qF_Threats
+
+# -------------------------
+# 7. Combinations Politics + Badwords
+# -------------------------
+
+def test_politics_then_badword_self(dfa, tokenizer):
+    result = run_dfa_on_text(dfa, tokenizer, "These politicians are idiots", "qF_Self")
+    assert result == dfa.qF_Offensive
+
+def test_politics_then_badword_generic(dfa, tokenizer):
+    result = run_dfa_on_text(dfa, tokenizer, "Politics is stupid shit", "qF_Generic")
+    assert result == dfa.qF_Offensive
+
+def test_politics_then_badword_others(dfa, tokenizer):
+    result = run_dfa_on_text(dfa, tokenizer, "Those politicians are fucking idiots", "qF_Others")
+    assert result == dfa.qF_Hate
+
+
+def test_badword_then_politics_self(dfa, tokenizer):
+    result = run_dfa_on_text(dfa, tokenizer, "Dumb politicians", "qF_Self")
+    assert result == dfa.qF_Offensive
+
+def test_badword_then_politics_generic(dfa, tokenizer):
+    result = run_dfa_on_text(dfa, tokenizer, "Shitty politics", "qF_Generic")
+    assert result == dfa.qF_Offensive
+
+def test_badword_then_politics_others(dfa, tokenizer):
+    result = run_dfa_on_text(dfa, tokenizer, "Fucking politicians", "qF_Others")
+    assert result == dfa.qF_Hate
+
+
+# -------------------------
+# 8. Combinations Politics + Violence
+# -------------------------
+
+def test_politics_then_violence_self(dfa, tokenizer):
+    result = run_dfa_on_text(dfa, tokenizer, "I want to attack politicians", "qF_Self")
+    assert result == dfa.qF_Violence
+
+def test_politics_then_violence_generic(dfa, tokenizer):
+    result = run_dfa_on_text(dfa, tokenizer, "Violence from politicians is everywhere", "qF_Generic")
+    assert result == dfa.qF_Safe
+
+def test_politics_then_violence_others(dfa, tokenizer):
+    result = run_dfa_on_text(dfa, tokenizer, "We should kill corrupt politicians", "qF_Others")
+    assert result == dfa.qF_Hate
+
+def test_violence_then_politics_self(dfa, tokenizer):
+    result = run_dfa_on_text(dfa, tokenizer, "I will kill the politicians", "qF_Self")
+    assert result == dfa.qF_Violence
+
+def test_violence_then_politics_generic(dfa, tokenizer):
+    result = run_dfa_on_text(dfa, tokenizer, "Violence and politics always mix", "qF_Generic")
+    assert result == dfa.qF_Safe
+
+def test_violence_then_politics_others(dfa, tokenizer):
+    result = run_dfa_on_text(dfa, tokenizer, "He wants to kill politicians", "qF_Others")
+    assert result == dfa.qF_Hate
