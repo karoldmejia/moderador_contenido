@@ -14,7 +14,7 @@ Before, we would like to explain the different categories which our model can cl
 ### 1.1. Hate speech / Offensive
 
 * **Lists used:** `badwords`, `politics` (when combined with insults), `bademojis`.
-* **Description:** Detection of insults, derogatory expressions, racism, sexism, or direct attacks.
+* **Description:** Dretection of insults, derogatory expressions, racism, sexism, or direct attacks.
 * **Example:**
 
   ```
@@ -48,9 +48,9 @@ Before, we would like to explain the different categories which our model can cl
   ```
 
 
-### 1.4. Spam / Scam / Promotions
+### 1.4. Spam
 
-* **Lists used:** `spamwords`, `fakeclaims`, URLs, repeated hashtags.
+* **Lists used:** `spamwords`, `fakeclaims`, repeated URLs, repeated hashtags.
 * **Description:** Identification of fraud attempts, mass advertising, or suspicious links.
 * **Example:**
 

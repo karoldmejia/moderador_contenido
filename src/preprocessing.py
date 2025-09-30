@@ -52,7 +52,7 @@ class RegexTokenizer:
             word_lower = word.lower()
 
             # URLs, hashtags, mentions
-            if self.patterns["URL"].match(word):
+            if self.patterns["URL"].fullmatch(word):
                 tokens.append("URL")
                 continue
             if self.patterns["HASHTAG"].match(word):
