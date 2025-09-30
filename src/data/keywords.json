@@ -29,7 +29,7 @@
   "politics": [
     "democrats", "republicans", "communists", "fascists", "liberals", "conservatives", "socialists", "capitalists",
     "corruption", "dictator", "politician", "politicians", "election", "government", "senator", "president", "vote", "policy", "law",
-    "protest", "rights", "traitor", "enemy", "liberate", "resist", "rigged", "fake election", "#maga", "#resist", "#vote2025",
+    "protest", "rights", "traitor", "enemy", "liberate", "resist", "rigged", "election", "#maga", "#resist", "#vote2025",
     "leader", "politics"
   ],
   "pronouns": [
@@ -37,8 +37,8 @@
     "she", "her", "hers", "we", "us", "our", "ours", "they", "them", "theirs"
   ],
   "pronouns_self": ["i", "me", "my", "myself"],
-  "pronouns_other": ["you", "your", "him", "her", "he", "she", "them", "yourself"],
-  "pronouns_group": ["we", "us", "our", "they", "them", "himself", "herself", "ourselves", "themselves"],
+  "pronouns_other": ["you", "your", "him", "her", "he", "she", "them", "yourself", "others"],
+  "pronouns_group": ["we", "us", "our", "they", "them", "himself", "herself", "ourselves", "themselves", "yourselves", "others", "everyone", "everybody", "anyone", "anybody", "someone", "somebody"],
   "aux_verbs": [
     "am", "is", "are", "was", "were", "be", "being", "been",
     "have", "has", "had",

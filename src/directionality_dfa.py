@@ -1,6 +1,6 @@
 class DirectionalityDFA:
     def __init__(self):
-        # Estados
+        # States
         self.q0 = "q0"
         self.q1 = "q1"  # Self detected
         self.q2 = "q2"  # Others detected
@@ -9,7 +9,7 @@ class DirectionalityDFA:
         self.qF_Others = "qF_Others"
         self.qF_Generic = "qF_Generic"
 
-        # Estado inicial
+        # Initial state
         self.state = self.q0
 
     def reset(self):
@@ -17,23 +17,23 @@ class DirectionalityDFA:
 
     def transition(self, token):
         """
-        Aplica la transición del autómata dado un token.
+        Applies the transition of the automaton given a token.
         """
-        # Si aparece un pronombre en cualquier momento, actualiza
+        # If a pronoun appears at any time, update the state
         if token == "PRONOUN_SELF":
             self.state = self.q1
         elif token == "PRONOUN_OTHER":
             self.state = self.q2
         else:
-            # Si aún no se ha clasificado, marca como genérico
+            # If not yet classified, mark as generic
             if self.state == self.q0:
                 self.state = self.q3
-        # Si ya está en q1 o q2, no se cambia por genérico
+        # If already in q1 or q2, do not change to generic
 
 
     def end_of_input(self):
         """
-        Transición al estado final ($).
+        Transition to the final state ($).
         """
         if self.state == self.q1:
             self.state = self.qF_Self
