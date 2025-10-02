@@ -8,6 +8,18 @@ This model is designed to analyze text **token by token** and classify it into c
 
 ---
 
+# System Architecture
+
+We use 3 specialized DFAs for content analysis:
+
+1. Directionality DFA: Determines if content is directed at self, others, or is generic
+
+2. Content Classification DFA (this document): Classifies content into moderation categories based on keywords and directionality
+
+3. Spam Detection DFA: Identifies spam through URL counting, hashtags, and spam words
+
+---
+
 Before, we would like to explain the different categories which our model can classify content:
 
 
