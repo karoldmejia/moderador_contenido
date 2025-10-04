@@ -1,9 +1,12 @@
 import re
 import json
 
+from pyparsing import Path
+
 class RegexTokenizer:
     def __init__(self, keywords_file="keywords.json"):
-        with open(keywords_file, "r", encoding="utf-8") as f:
+        file_path = Path(__file__).parent / keywords_file
+        with open(file_path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
         # Simple word sets
