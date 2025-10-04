@@ -74,7 +74,7 @@ T = (Q, Σ, Γ, δ, λ, q0, F)
 
 ---
 
-## 5. Operational Semantics (step‑by‑step)
+## 5. Operational semantics
 
 1) In `q0`, read the next token:
    - If it is in `{badword, sexword, violence}`, move to `qC` and emit `ε` (do not emit the token surface).
@@ -87,7 +87,7 @@ This runs online with constant memory: no buffering of the whole input is requir
 
 ---
 
-## 6. Edge Cases and How They Resolve
+## 6. Edge cases and how they resolve
 
 - **Trailing punctuation:** `badword!!!` → `*******!!!` (punctuation is outside the masked token).  
 - **Hashtags and mentions:** `#badword` or `@badword` → define whether `#`/`@` belongs to the token. If not, masking yields `#*******` / `@*******`.  
@@ -115,7 +115,7 @@ This runs online with constant memory: no buffering of the whole input is requir
 
 ---
 
-## 8. Integration Point 
+## 8. Integration point 
 
 - The **DFAs label** content (directionality, category, spam).  
 - The **FST transforms** the visible text. Masking is policy‑driven and independent from classification.  

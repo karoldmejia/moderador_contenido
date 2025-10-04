@@ -1,0 +1,75 @@
+Post:
+    parts*=Part
+;
+
+Part:
+      Mention
+    | Hashtag
+    | Link
+    | Bold
+    | Italic
+    | Underline
+    | Font
+    | Formula
+    | Text
+;
+
+// ---------------------------
+// TERMINALS
+// ---------------------------
+
+Mention: /@\w+/;                          // @username
+Hashtag: /#\w+/;                          // #topic
+Link: /https?:\/\/[^\s]+/;                // http://... o https://...
+Bold:   /\*[^*]+\*/;                      // *bold*
+Italic: /-[^-]+-/;                        // -italic-
+Underline: /_[^_]+_/;                     // _underlined_
+Font:   /\/\/[^\/]+\/\//;                 // //different font//
+Text:   /[^\s]+/;                         // cualquier otra palabra (texto plano)
+
+
+// ---------------------------
+// FORMULAS (mini-LaTeX)
+// ---------------------------
+
+Formula:
+    '$' expr=Expr '$'
+;
+
+// Mathematical expressions
+Expr:
+    terms+=Term (op=Op terms+=Term)*;
+
+
+// A term can be an identifier, number or structure
+Term:
+      ID
+    | INT
+    | SubSup
+    | Frac
+    | Sqrt
+    | Group
+;
+
+// Subscripts and superscripts
+SubSup:
+    base=ID ( '^' sup=Expr )? ( '_' sub=Expr )?
+;
+
+// Fractions
+Frac:
+    '\\frac' '{' num=Expr '}' '{' den=Expr '}'
+;
+
+// Square roots and with index
+Sqrt:
+    '\\sqrt' ('[' index=Expr ']')? '{' value=Expr '}'
+;
+
+// Groupings with keys
+Group:
+    '{' expr=Expr '}'
+;
+
+// Basic operators
+Op: '+' | '-' | '*' | '/' | '=' ;
