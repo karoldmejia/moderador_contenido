@@ -1,0 +1,273 @@
+body {
+    font-family: 'Manrope', sans-serif;
+    background-color: #CEBFD9;
+    margin: 0;
+    padding: 0;
+    color: black;
+}
+
+.main-container {
+    width: 65%;
+    margin: 50px auto;
+}
+
+
+/* ===== Recuadro principal ===== */
+.input-section {
+    background-color: #EFF294;
+    border-radius: 12px;
+    padding: 30px;
+    border: 4px solid #000000;
+    box-shadow: 10px 10px 0 0 #000000;
+    margin-bottom: 40px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    font-size: 28px;
+    margin: 0;
+    font-weight: 800;
+}
+
+/* Botón de detalles */
+.details-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #6FD13F;
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 4px solid #000000;
+    box-shadow: 5px 5px 0 0 #000000;
+}
+
+.details-button button:hover {
+    background: #58b530;
+}
+
+.details-button span {
+    color: white;
+    font-size: 28px;
+}
+
+.details-button.disabled {
+    background: #ccc;
+    box-shadow: none;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+/* ===== Input y botón Analyze ===== */
+textarea {
+    width: 95%;
+    height: 90px;
+    border: 4px solid #000000;
+    border-radius: 8px;
+    padding: 20px;
+    font-size: 16px;
+    resize: none;
+    background-color: white;
+    margin-top: 20px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+}
+
+/* Botón Analyze debajo, no ocupa todo el ancho y alineado a la derecha */
+.analyze-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.analyze-button-container button {
+    background: #8862A3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s;
+    border: 4px solid #000000;
+    box-shadow: 5px 5px 0 0 #000000;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+}
+
+.analyze-button-container button:hover {
+    background: #573470;
+}
+
+/* ===== Texto procesado ===== */
+.processed-section {
+    background-color: #EFF294;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    border: 4px solid #000000;
+    box-shadow: 5px 5px 0 0 #000000;
+}
+
+.processed-title {
+    text-align: left;
+    margin-left: 15px;
+    font-size: 18px;
+}
+
+.processed-text {
+    font-size: 25px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+p.processed-text {
+    margin-top: 10px;
+}
+
+/* ===== Warnings ===== */
+.warnings {
+    margin-top: 25px;
+    background: transparent;
+}
+
+.warning-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: orange;
+    border-radius: 30px;
+    padding: 10px 18px;
+    margin-bottom: 10px;
+    width: 97%;
+    border: 4px solid #000000;
+    box-shadow: 3px 3px 0 0 #000000;
+}
+
+.warning-item span.material-symbols-rounded {
+    font-size: 25px;
+    color: white;
+    font-weight: 600;
+
+}
+
+.warning-item span {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.warning-item.safe {
+    background: #27B227;
+}
+
+/* ===== Contenedor principal de Detailed Steps ===== */
+.detailed-container {
+    width: 65%;
+    margin: 50px auto;
+}
+
+/* ===== Header ===== */
+.detailed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.detailed-header h1 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #6FD13F;
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 4px solid #000000;
+    box-shadow: 5px 5px 0 0 #000000;
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.back-button:hover {
+    background: #58b530;
+}
+
+/* ===== Secciones de pasos ===== */
+.step-section {
+    background-color: #EFF294;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    border: 4px solid #000000;
+    box-shadow: 5px 5px 0 0 #000000;
+}
+
+.step-section h3 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.step-section pre,
+.step-section p {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    overflow-x: auto;
+    border: 4px solid #000000;
+    box-shadow: 3px 3px 0 0 #000000;
+}
+
+
+.material-symbols-rounded.step-icon {
+    font-size: 24px;
+    color: black;
+    font-weight: 600;
+}
+
+.step-warning {
+    background: orange;
+    border-radius: 30px;
+    padding: 10px 18px;
+    margin: 10px 0;
+    border: 4px solid #000000;
+    box-shadow: 3px 3px 0 0 #000000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.step-warning span.material-symbols-rounded {
+    font-size: 25px;
+    color: white;
+    font-weight: 600;
+}
+
+.step-warning span {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}

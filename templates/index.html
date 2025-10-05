@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>What the Post?!</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Recuadro principal -->
+        <div class="input-section">
+            <div class="header">
+                <h1>What the Post?!</h1>
+                <a href="{{ url_for('details') }}" 
+                   class="details-button {% if not detailed_available %}disabled{% endif %}">
+                    <span class="material-symbols-rounded">frame_inspect</span>
+                </a>
+            </div>
+
+            <form method="POST" action="/">
+                <textarea name="user_text" placeholder="Write your message here..." required>{{ user_text }}</textarea>
+                <div class="analyze-button-container">
+                    <button type="submit">Analyze</button>
+                </div>
+            </form>
+        </div>
+
+        {% if result %}
+        <!-- Recuadro del texto procesado -->
+        <h2 class="processed-title">Your result:</h2>
+        <div class="processed-section">
+            <p class="processed-text">{{ result|safe }}</p>
+        </div>
+
+        <!-- Recuadro de los warnings -->
+        <div class="warnings">
+            {% if warnings %}
+                {% for w in warnings %}
+                <div class="warning-item">
+                <span class="material-symbols-rounded">warning</span>
+                    <span>{{ w }}</span>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="warning-item safe">
+                    <span class="material-symbols-rounded">check_circle</span>
+                    <span>You're good to go!</span>
+                </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

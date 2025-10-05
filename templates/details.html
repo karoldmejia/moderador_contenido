@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detailed analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="detailed-container">
+        <!-- Header -->
+        <div class="detailed-header">
+            <h1>Detailed analysis</h1>
+            <a href="{{ url_for('index') }}" class="back-button">
+                <span class="material-symbols-rounded">arrow_back</span>
+            </a>
+        </div>
+
+        <!-- Tokens -->
+        <div class="step-section">
+            <h3><span class="material-symbols-rounded step-icon">widgets</span> Tokens:</h3>
+            <pre>{{ steps.tokens }}</pre>
+        </div>
+
+        <!-- Spam DFA -->
+        <div class="step-section">
+            <h3><span class="material-symbols-rounded step-icon">security</span> Spam DFA state:</h3>
+            <p>{{ steps.spam_state }}</p>
+        </div>
+
+        <!-- Content DFA -->
+        <div class="step-section">
+            <h3><span class="material-symbols-rounded step-icon">explore</span> Content DFA state:</h3>
+            <p>{{ steps.content_state }}</p>
+        </div>
+
+        <!-- DFA Warnings -->
+        <div class="step-section">
+            <h3><span class="material-symbols-rounded step-icon">warning</span> Detected DFA warnings:</h3>
+            {% for w in steps.dfa_warnings %}
+                <div class="step-warning">
+                    <span class="material-symbols-rounded">warning</span>
+                    <span>{{ w }}</span>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Censored Text -->
+        <div class="step-section">
+            <h3><span class="material-symbols-rounded step-icon">content_cut</span> Censored text:</h3>
+            <pre>{{ steps.censored_text }}</pre>
+        </div>
+
+        <!-- Readable warnings -->
+        <div class="step-section">
+            <h3><span class="material-symbols-rounded step-icon">campaign</span> Readable warnings:</h3>
+            <pre>{{ steps.readable_warnings }}</pre>
+        </div>
+
+        <!-- Final post -->
+        <div class="step-section">
+            <h3><span class="material-symbols-rounded step-icon">post_add</span> Final post:</h3>
+            <pre>{{ steps.final_post }}</pre>
+        </div>
+    </div>
+</body>
+</html>
