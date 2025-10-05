@@ -1,7 +1,14 @@
+// ============================
+// POST GRAMMAR
+// ============================
+
 Post:
     parts*=Part
 ;
 
+// ---------------------------
+// PARTS (post's content)
+// ---------------------------
 Part:
       Mention
     | Hashtag
@@ -17,7 +24,6 @@ Part:
 // ---------------------------
 // TERMINALS
 // ---------------------------
-
 Mention: /@\w+/;                          // @username
 Hashtag: /#\w+/;                          // #topic
 Link: /https?:\/\/[^\s]+/;                // http://... o https://...
@@ -25,51 +31,79 @@ Bold:   /\*[^*]+\*/;                      // *bold*
 Italic: /-[^-]+-/;                        // -italic-
 Underline: /_[^_]+_/;                     // _underlined_
 Font:   /\/\/[^\/]+\/\//;                 // //different font//
-Text:   /[^\s]+/;                         // cualquier otra palabra (texto plano)
-
+Text: /[^\s$]+/;
 
 // ---------------------------
-// FORMULAS (mini-LaTeX)
+// FORMULAS
 // ---------------------------
-
 Formula:
     '$' expr=Expr '$'
 ;
 
-// Mathematical expressions
+// ============================
+// EXPRESSIONS
+// ============================
 Expr:
-    terms+=Term (op=Op terms+=Term)*;
+    first=Term rest*=OpTermPair*
+;
 
+OpTermPair:
+    op=Op term=Term;
 
-// A term can be an identifier, number or structure
+// ---------------------------
+// TERMS
+// ---------------------------
 Term:
-      ID
-    | INT
-    | SubSup
+    Factor
+;
+
+Factor:
+      SubSup
     | Frac
     | Sqrt
     | Group
+    | Atom
+    | INT
 ;
 
-// Subscripts and superscripts
+Atom:
+      ID
+    | INT
+;
+
+// ---------------------------
+// SUBSCRIPT / SUPERSCRIPT
+// ---------------------------
 SubSup:
-    base=ID ( '^' sup=Expr )? ( '_' sub=Expr )?
+    base=Atom ('^' sup=Factor)? ('_' sub=Factor)?
 ;
 
-// Fractions
+// ---------------------------
+// FRAC / SQRT
+// ---------------------------
 Frac:
-    '\\frac' '{' num=Expr '}' '{' den=Expr '}'
+    '\frac' '{' num=Expr '}' '{' den=Expr '}'
 ;
 
-// Square roots and with index
 Sqrt:
-    '\\sqrt' ('[' index=Expr ']')? '{' value=Expr '}'
+    '\sqrt' ('[' index=Expr ']')? '{' value=Expr '}'
 ;
 
-// Groupings with keys
+// ---------------------------
+// GROUPING (PARENTHESES AND BRACES)
+// ---------------------------
 Group:
-    '{' expr=Expr '}'
+      '(' expr=Expr ')'   // parentheses
+    | '{' expr=Expr '}'   // braces
 ;
 
-// Basic operators
+// ---------------------------
+// OPERATORS
+// ---------------------------
 Op: '+' | '-' | '*' | '/' | '=' ;
+
+// ---------------------------
+// IDENTIFIERS / NUMBERS
+// ---------------------------
+ID: /[a-zA-Z]\w*/;
+INT: /\d+(\.\d+)?/;

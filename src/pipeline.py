@@ -17,19 +17,19 @@ class TextPipeline:
     def run(self, text):
         detailed_steps = {}
 
-        # 1. Preprocessing (tokenization)
+        # 1️⃣ Preprocesamiento (tokenización)
         tokens = self.tokenizer.tokenize(text)
         detailed_steps["tokens"] = tokens
 
-        # 2. Spam DFA
+        # 2️⃣ Detección de spam
         spam_state = self.spam_dfa.process_text(text)
         detailed_steps["spam_state"] = spam_state
 
-        # 3. Directionality and Content DFA
+        # 3️⃣ Detección de contenido inapropiado
         content_state = self.content_dfa.process_text(text)
         detailed_steps["content_state"] = content_state
 
-        # 4. Warnings detected
+        # 4️⃣ Recolección de advertencias
         all_warnings = []
         if spam_state != "qSafe":
             all_warnings.append(spam_state)
@@ -37,11 +37,13 @@ class TextPipeline:
             all_warnings.append(content_state)
         detailed_steps["dfa_warnings"] = all_warnings
 
-        # 5. FSTs and final transformation (only if there are warnings)
+        # 5️⃣ Aplicación de censura y transformación
         if all_warnings:
             censored_text = self.censorship_fst.process_text(text)
             readable_warnings = [
-                self.warning_fst.generate_warning(w) for w in all_warnings
+                self.warning_fst.generate_warning(w)
+                for w in all_warnings
+                if w
             ]
             final_post = transform_post(censored_text)
         else:
@@ -50,14 +52,17 @@ class TextPipeline:
             final_post = transform_post(text)
 
         detailed_steps["censored_text"] = censored_text
-        detailed_steps["readable_warnings"] = [w for w in readable_warnings if w]
+        detailed_steps["readable_warnings"] = readable_warnings
         detailed_steps["final_post"] = final_post
 
-        # Final results summarized for the “final hearing”
+        # 6️⃣ Resultado final simplificado
         final_result = {
-            "text": final_post["text"],
-            "enhancements": final_post["enhancements"],
-            "warnings": detailed_steps["readable_warnings"]
+            "text": final_post["text"],  # <-- HTML con fórmulas intactas ($...$)
+            "warnings": readable_warnings
         }
 
-        return {"detailed": detailed_steps, "final": final_result}
+        # Devolvemos dos niveles: uno para debug, otro para render
+        return {
+            "detailed": detailed_steps,
+            "final": final_result
+        }

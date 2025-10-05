@@ -12,7 +12,7 @@ body {
 }
 
 
-/* ===== Recuadro principal ===== */
+/* ===== Main section ===== */
 .input-section {
     background-color: #EFF294;
     border-radius: 12px;
@@ -34,7 +34,7 @@ h1 {
     font-weight: 800;
 }
 
-/* Botón de detalles */
+/* Details button */
 .details-button {
     display: flex;
     align-items: center;
@@ -64,7 +64,7 @@ h1 {
     cursor: not-allowed;
 }
 
-/* ===== Input y botón Analyze ===== */
+/* ===== Input and Analyze button ===== */
 textarea {
     width: 95%;
     height: 90px;
@@ -79,7 +79,6 @@ textarea {
     font-weight: 500;
 }
 
-/* Botón Analyze debajo, no ocupa todo el ancho y alineado a la derecha */
 .analyze-button-container {
     display: flex;
     justify-content: flex-end;
@@ -105,7 +104,7 @@ textarea {
     background: #573470;
 }
 
-/* ===== Texto procesado ===== */
+/* ===== Processed text ===== */
 .processed-section {
     background-color: #EFF294;
     border-radius: 12px;
@@ -167,7 +166,7 @@ p.processed-text {
     background: #27B227;
 }
 
-/* ===== Contenedor principal de Detailed Steps ===== */
+/* ===== detailed steps ===== */
 .detailed-container {
     width: 65%;
     margin: 50px auto;
@@ -208,7 +207,7 @@ p.processed-text {
     background: #58b530;
 }
 
-/* ===== Secciones de pasos ===== */
+/* ===== Step sections ===== */
 .step-section {
     background-color: #EFF294;
     border-radius: 12px;

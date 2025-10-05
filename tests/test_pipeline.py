@@ -39,10 +39,10 @@ def test_hashtags_mentions(pipeline):
     assert result["warnings"] == []
 
 def test_formula_text(pipeline):
-    text = "The fraction is $\\frac{x+1}{y-1}$"
+    text = "The fraction is $\frac{x+1}{y-1}$"
     result = pipeline.run(text)["final"]
     assert result["warnings"] == []
-    assert "<span class='frac'>" in result["text"]
+    assert "$\frac{x + 1}{y - 1}$" in result["text"]
 
 def test_badword_sexword_text(pipeline):
     text = "You are a stupid idiot and watched porn"

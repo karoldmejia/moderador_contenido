@@ -5,11 +5,20 @@
     <title>What the Post?!</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+    <script>
+      window.MathJax = {
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+        options: {
+          skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
 </head>
 <body>
     <div class="main-container">
-        <!-- Recuadro principal -->
         <div class="input-section">
             <div class="header">
                 <h1>What the Post?!</h1>
@@ -28,18 +37,16 @@
         </div>
 
         {% if result %}
-        <!-- Recuadro del texto procesado -->
         <h2 class="processed-title">Your result:</h2>
         <div class="processed-section">
             <p class="processed-text">{{ result|safe }}</p>
         </div>
 
-        <!-- Recuadro de los warnings -->
         <div class="warnings">
             {% if warnings %}
                 {% for w in warnings %}
                 <div class="warning-item">
-                <span class="material-symbols-rounded">warning</span>
+                    <span class="material-symbols-rounded">warning</span>
                     <span>{{ w }}</span>
                 </div>
                 {% endfor %}
@@ -52,5 +59,13 @@
         </div>
         {% endif %}
     </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.MathJax) {
+        MathJax.typesetPromise();
+      }
+    });
+    </script>
 </body>
 </html>

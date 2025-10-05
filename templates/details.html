@@ -7,7 +7,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 
+    <script>
+      window.MathJax = {
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+        options: {
+          skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
 </head>
+
 <body>
     <div class="detailed-container">
         <!-- Header -->
@@ -50,20 +60,28 @@
         <!-- Censored Text -->
         <div class="step-section">
             <h3><span class="material-symbols-rounded step-icon">content_cut</span> Censored text:</h3>
-            <pre>{{ steps.censored_text }}</pre>
+            <p class="processed-text">{{ steps.censored_text|safe }}</p>
         </div>
 
         <!-- Readable warnings -->
         <div class="step-section">
             <h3><span class="material-symbols-rounded step-icon">campaign</span> Readable warnings:</h3>
-            <pre>{{ steps.readable_warnings }}</pre>
+            <pre>{{ steps.readable_warnings|safe }}</pre>
         </div>
 
         <!-- Final post -->
         <div class="step-section">
             <h3><span class="material-symbols-rounded step-icon">post_add</span> Final post:</h3>
-            <pre>{{ steps.final_post }}</pre>
+            <p class="processed-text">{{ steps.final_post.text|safe }}</p>
         </div>
     </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.MathJax) {
+        MathJax.typesetPromise();
+      }
+    });
+    </script>
 </body>
 </html>

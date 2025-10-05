@@ -101,5 +101,3 @@ Same as above.
 Assures that sentences lacking explicit self/other pronouns are categorized as Generic.
 
 ---
-
-*End of document.*
